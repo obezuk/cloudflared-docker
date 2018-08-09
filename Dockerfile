@@ -6,7 +6,7 @@ RUN tar -xzvf /cloudflared.tgz
 
 FROM alpine:latest
 COPY --from=0 /cloudflared /usr/bin/cloudflared
-RUN apk add --no-cache libc6-compat
+RUN apk update && apk add libc6-compat ca-certificates && rm -rf /var/cache/apk/*
 RUN chmod +x /usr/bin/cloudflared
 
 ENTRYPOINT ["cloudflared"]
